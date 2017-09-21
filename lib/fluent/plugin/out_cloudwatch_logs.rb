@@ -41,7 +41,14 @@ module Fluent
       super
 
       require 'aws-sdk-core'
+      begin
+        require 'aws-sdk-cloudwatchlogs'
+      rescue LoadError
+        log.warn "could not load aws-sdk-cloudwatchlogs defaulting to v2"
+      end
+
     end
+
 
     def placeholders
       [:percent]
